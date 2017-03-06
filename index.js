@@ -93,7 +93,7 @@ function createRock(x) {
      * Otherwise, if the rock hasn't reached the bottom of
      * the GAME, we want to move it again.
      */
-     var topNumber = rock.style.top.replace('px', '')
+     /*var topNumber = rock.style.top.replace('px', '')
      var top = parseInt(topNumber, 10)
 
      function step() {
@@ -103,9 +103,23 @@ function createRock(x) {
           window.requestAnimationFrame(step)
         }
         else if (top === 20) {
-          rock.style.top = '0px'
+          ROCKS.pop(rock)
         }
-      }
+      }*/
+      var leftNumber = rock.style.left.replace('px', '')
+      var left = parseInt(topNumber, 10)
+
+      function step() {
+        rock.style.left = `${left - 2}px`
+
+         if (left > 0 ) {
+           window.requestAnimationFrame(step)
+         }
+         else if (left === 20) {
+           ROCKS.pop(rock)
+         }
+       }
+
 
     /**
      * But if the rock *has* reached the bottom of the GAME,
@@ -114,9 +128,9 @@ function createRock(x) {
   }
 
   // We should kick of the animation of the rock around here
-  window.requestAnimationFrame(step)
   // Add the rock to ROCKS so that we can remove all rocks
   // when there's a collision
+  window.requestAnimationFrame(step)
   ROCKS.push(rock)
 
   // Finally, return the rock element you've created
@@ -130,6 +144,7 @@ function createRock(x) {
  * Finally, alert "YOU LOSE!" to the player.
  */
 function endGame() {
+  gameInterval = null
   return alert("YOU LOSE!")
 }
 
