@@ -145,6 +145,10 @@ function createRock(x) {
  */
 function endGame() {
   clearInterval(gameInterval)
+  document.removeEventListener('keydown', moveDodger)
+  if (ROCKS.length > 0) {
+    ROCKS = []
+  }
   return alert("YOU LOSE!")
 }
 
@@ -158,7 +162,11 @@ function moveDodger(e) {
    * And be sure to use the functions declared below!
    */
    document.addEventListener('keydown', function(e) {
-     if (e.which === LEFT_ARROW) {
+     if (e.which !== LEFT_ARROW && e.which !== RIGHT_ARROW) {
+       e.preventDefault()
+       e.stopPropagation()
+     }
+     else if (e.which === LEFT_ARROW) {
        e.preventDefault()
        e.stopPropagation()
        moveDodgerLeft()
